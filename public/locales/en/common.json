@@ -1,0 +1,11 @@
+{
+  "appName": "My App",
+  "welcome": "Welcome",
+  "description": "This is a test application",
+  "login": "Log in",
+  "logout": "Log out",
+  "settings": "Settings",
+  "language": "Language",
+  "save": "Save",
+  "cancel": "Cancel"
+}
