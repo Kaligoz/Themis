@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
+import RegisterForm from "../components/RegisterForm"
 
 export default function AuthPage() {
     return (
@@ -14,11 +15,11 @@ export default function AuthPage() {
                         <TabsTrigger value="login">Sign In</TabsTrigger>
                         <TabsTrigger value="register">Sign Up</TabsTrigger>
                     </TabsList>
-                    <TabsContent value="login">
+                    <TabsContent value="login"> 
                         this is sign in
                     </TabsContent>
                     <TabsContent value="register">
-                        this is sign up
+                        <RegisterForm/>
                     </TabsContent>
                 </Tabs>
             </section>
