@@ -32,12 +32,12 @@ export default function LoginForm() {
     }
 
     return (
-        <form className="flex flex-col justify-center items-center rounded-md bg-background p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)]">
+        <form className="flex flex-col justify-center items-center rounded-md bg-[rgb(var(--background))] p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)] w-full max-w-[450px]">
 
             <h1 className="text-3xl font-semibold mb-4">Sign In</h1>
             <p className="mb-4 w-full text-left">To begin using Themis please, register or <br/> login via your email account.</p>
 
-            <div className="flex flex-col items-left w-full">
+            <div className="flex flex-col items-start w-full">
 
                 <label htmlFor="Email" className="mb-1.5">Email</label>
 
@@ -48,7 +48,7 @@ export default function LoginForm() {
                     placeholder="email@gmail.com"
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-4"
+                    className="w-full h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-4"
                 />
 
                 <label htmlFor="Password" className="mb-1.5">Password</label>
@@ -60,12 +60,22 @@ export default function LoginForm() {
                     placeholder="********"
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-4"
+                    className="w-full h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-4"
                 />
 
             </div>
             
-            <Button className="w-full bg-[rgb(var(--primary))] text-[rgb(var(--background))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--background))] cursor-pointer" disabled={loading}>Login</Button>
+            <Button className="w-full bg-[rgb(var(--primary))] text-[rgb(var(--background))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--background))] cursor-pointer mb-4" disabled={loading}>
+                Login
+            </Button>
+
+            <Button className="w-full bg-[rgb(var(--primary))] text-[rgb(var(--background))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--background))] cursor-pointer mb-4">
+                Sign in with Google
+            </Button>
+
+            <Button className="w-full bg-[rgb(var(--primary))] text-[rgb(var(--background))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--background))] cursor-pointer mb-4">
+                Sign in with Github
+            </Button>
         </form>
     )
 }

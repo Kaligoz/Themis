@@ -39,12 +39,12 @@ export default function RegisterForm() {
     }
 
     return (
-        <form className="flex flex-col justify-center items-center rounded-md bg-background p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)]">
+        <form className="flex flex-col justify-center items-center rounded-md bg-[rgb(var(--background))] p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)] w-full max-w-[450px]">
 
             <h1 className="text-3xl font-semibold mb-4">Sign Up</h1>
             <p className="mb-4 w-full text-left">Enter your information to create an account</p>
 
-            <div className="flex flex-col items-left">
+            <div className="flex flex-col items-left w-full">
 
                 <div className="flex justify-between items-start gap-8 mb-4">
 
