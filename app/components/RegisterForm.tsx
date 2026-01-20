@@ -14,8 +14,6 @@ export default function RegisterForm() {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
 
-
-
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
@@ -39,14 +37,14 @@ export default function RegisterForm() {
     }
 
     return (
-        <form className="flex flex-col justify-center items-center rounded-md bg-[rgb(var(--background))] p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)] w-full max-w-[450px]">
+        <form onSubmit={onSubmit} className="flex flex-col justify-center items-center rounded-md bg-[rgb(var(--background))] p-4 shadow-[5px_10px_20px_10px_rgba(0,_0,_0,_0.1)] w-full max-w-[450px]">
 
             <h1 className="text-3xl font-semibold mb-4">Sign Up</h1>
             <p className="mb-4 w-full text-left">Enter your information to create an account</p>
 
             <div className="flex flex-col items-left w-full">
 
-                <div className="flex justify-between items-start gap-8 mb-4">
+                <div className="flex justify-between items-start gap-8 mb-2">
 
                     <div className="flex flex-col justify-center items-start">
                         <label htmlFor="firstName" className="mb-1.5">First name</label>
@@ -80,7 +78,7 @@ export default function RegisterForm() {
                     placeholder="email@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-6.5 mb-4 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
                 />
 
                 <label htmlFor="Password" className="mb-1.5">Password</label>
@@ -90,7 +88,7 @@ export default function RegisterForm() {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="h-6.5 mb-4 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
                 />
 
                 <label htmlFor="ProfImage" className="mb-1.5">Profile Image</label>
