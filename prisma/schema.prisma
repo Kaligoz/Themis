@@ -1,7 +1,6 @@
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -10,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String    @id @default(cuid())
   name          String
   email         String
   emailVerified Boolean   @default(false)
@@ -33,7 +32,7 @@ model User {
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @default(cuid())
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
@@ -49,7 +48,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(cuid())
   accountId             String
   providerId            String
   userId                String
@@ -69,7 +68,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id
+  id         String   @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -81,7 +80,7 @@ model Verification {
 }
 
 model Subscription {
-  id               String @id @default(auto()) @map("_id") 
+  id               String @id @default(cuid()) @map("_id") 
   name             String
   amount           Int
   currency         String @default("USD")
@@ -96,7 +95,7 @@ model Subscription {
 }
 
 model Debt {
-  id              String @id @default(auto()) @map("_id")
+  id              String @id @default(cuid()) @map("_id")
   initial         Int
   current         Int
   currency        String @default("USD")
@@ -109,7 +108,7 @@ model Debt {
 }
 
 model Purchase {
-  id              String @id @default(auto()) @map("_id")
+  id              String @id @default(cuid()) @map("_id")
   name            String
   amount          Int
   currency        String @default("USD")
@@ -122,7 +121,7 @@ model Purchase {
 }
 
 model Category {
-  id              String @id @default(auto()) @map("_id")
+  id              String @id @default(cuid()) @map("_id")
   name            String 
   userId          String
   user            User   @relation(fields: [userId], references: [id])
@@ -135,7 +134,7 @@ model Category {
 }
 
 model Income {
-  id              String @id @default(auto()) @map("_id")
+  id              String @id @default(cuid()) @map("_id")
   income          Int
   currency        String @default("USD")
 

@@ -3,33 +3,55 @@
 import { useState } from "react";
 import { authClient } from "../lib/auth-client";
 import { Button } from "../components/ui/button";
+import Image from "next/image";
+import { X } from "lucide-react";
+import { toast } from "sonner";
 
 export default function RegisterForm() {
 
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState<File | null>(null)
+    const [imagePreview, setImagePreview] = useState<string | null>(null)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
+
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (file) {
+			setImage(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImagePreview(reader.result as string);
+			};
+			reader.readAsDataURL(file);
+		}
+	};
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
         setError(null)
 
+        if (password !== passwordConfirmation) {
+            toast.error("Passwords do not match!")
+            return; 
+        }
+
         const { error } = await authClient.signUp.email({
-            name: `${firstName} ${lastName}`.trim(),
+            name: `${firstName} ${lastName}`,
             email,
             password,
-            image,
+            image: image ? await convertImageToBase64(image) : "",
         });
 
         setLoading(false)
 
         if(error) {
-            setError(error.message ?? "Failed to create account")
+            toast.error(error.message ?? "Failed to create account")
             return
         }
 
@@ -54,7 +76,7 @@ export default function RegisterForm() {
                             placeholder="John"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
                         />
                     </div>
 
@@ -66,7 +88,7 @@ export default function RegisterForm() {
                             placeholder="Doe"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
                         />
                     </div>
                 </div>
@@ -78,28 +100,62 @@ export default function RegisterForm() {
                     placeholder="email@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
                 />
 
                 <label htmlFor="Password" className="mb-1.5">Password</label>
                 <input
                     id="Password"
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
                 />
 
-                <label htmlFor="ProfImage" className="mb-1.5">Profile Image</label>
+                <label htmlFor="password_confirmation" className="mb-1.5">Confirm Password</label>
                 <input
-                    id="ProfImage"
-                    type="text"
-                    placeholder="Profile Image URL (Optional)"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                    className="h-6.5 mb-4 rounded-sm pl-0.5 bg-[rgb(var(--secondary))]"
+                    id="password_confirmation"
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    className="h-6.5 mb-2 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
                 />
+
+                <div className="grid gap-2 mb-2">
+                    <label htmlFor="image">Profile Image (optional)</label>
+                    <div className="flex items-end gap-4">
+                        {imagePreview && (
+                            <div className="relative w-16 h-16 rounded-sm overflow-hidden">
+                                <Image
+                                    src={imagePreview}
+                                    alt="Profile preview"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>
+                        )}
+                        <div className="flex items-center gap-2 w-full mb-2">
+                            <input
+                                id="image"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                className="w-full rounded-sm pl-0.5 bg-[rgb(var(--secondary))] text-gray-500" 
+                            />
+                            {imagePreview && (
+                                <X
+                                    className="cursor-pointer"
+                                    onClick={() => {
+                                        setImage(null);
+                                        setImagePreview(null);
+                                    }}
+                                />
+                            )}
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -109,4 +165,13 @@ export default function RegisterForm() {
 
         </form>
     )
+}
+
+async function convertImageToBase64(file: File): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onloadend = () => resolve(reader.result as string);
+		reader.onerror = reject;
+		reader.readAsDataURL(file);
+	});
 }
