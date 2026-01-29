@@ -1,11 +1,19 @@
 {
   "appName": "My App",
-  "welcome": "Welcome",
   "description": "This is a test application",
   "login": "Log in",
   "logout": "Log out",
-  "settings": "Settings",
   "language": "Language",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+
+  "settings": "Settings",
+  "incomeBtn": "Set Income",
+  "addSubBtn": "Add Subscription",
+  "addPurBtn": "Add Purchase",
+  "addDebtBtn": "Add Debt",
+  "general": "General",
+  "welcome": "Welcome",
+  "more": "More",
+  "exportData": "Export Data"
 }

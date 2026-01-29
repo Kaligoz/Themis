@@ -2,49 +2,59 @@
 
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/app/components/ui/sidebar";
 import { IconSquarePlus, IconCirclePlus, IconSettings } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
-export function NavMain() {
+type ModalType = "income" | "addSubscription" | "addPurchase" | "addDebt" | "settings" | "editSubscription" | "editPurchase" | "editDebt" |  null;
+
+interface NavMainProps {
+  onAction: (type: ModalType) => void;
+}
+
+export function NavMain({ onAction }: NavMainProps) {
+
+  const { t } = useTranslation("common")
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarGroupLabel>General</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-lg">{t("general")}</SidebarGroupLabel>
         <SidebarMenu>
           
           <SidebarMenuItem >
-            <SidebarMenuButton >
-              <IconCirclePlus/>
-              <span>Set Income</span>
+            <SidebarMenuButton onClick={() => onAction("income")}>
+              <IconSquarePlus />
+              <span>{t("incomeBtn")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem >
             <SidebarMenuButton >
               <IconCirclePlus/>
-              <span>Add Subscription</span>
+              <span>{t("addSubBtn")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem >
             <SidebarMenuButton >
               <IconCirclePlus/>
-              <span>Add Purchase</span>
+              <span>{t("addPurBtn")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem >
             <SidebarMenuButton >
-              <IconSquarePlus/>
-              <span>Add Debt</span>
+              <IconCirclePlus/>
+              <span>{t("addDebtBtn")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
         </SidebarMenu>
-        <SidebarGroupLabel>More</SidebarGroupLabel>
+        <SidebarGroupLabel className="text-lg">{t("more")}</SidebarGroupLabel>
         <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton >
+              <SidebarMenuButton onClick={() => onAction("settings")}>
                 <IconSettings/>
-                <span>Settings</span>
+                <span>{t("settings")}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
         </SidebarMenu>
