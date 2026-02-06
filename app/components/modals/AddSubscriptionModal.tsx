@@ -5,13 +5,18 @@ import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { createSubscription } from "@/app/actions/addSubscription";
 import { Input } from "../ui/input";
+import { CategoryPicker } from "../CategoryPicker";
+import { useTranslation } from "react-i18next";
 
 interface AddSubscriptionModalProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  existingCategories: string[];
 };
 
-export function AddSubscriptionModal({ isOpen, setIsOpen }: AddSubscriptionModalProps) {
+export function AddSubscriptionModal({ isOpen, setIsOpen, existingCategories }: AddSubscriptionModalProps) {
+
+    const { t } = useTranslation("common")
 
     async function handleAction(formData: FormData) {
         const result = await createSubscription(formData)
@@ -26,61 +31,55 @@ export function AddSubscriptionModal({ isOpen, setIsOpen }: AddSubscriptionModal
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="bg-[rgb(var(--background))]">
         <DialogHeader>
-            <DialogTitle>Add a Subscription</DialogTitle>
+            <DialogTitle>{t("subscriptionModal")}</DialogTitle>
         </DialogHeader>
-        <p>For us to better understand and calculate your finances please fill in the information below:</p>
+        <p>{t("modalSentence")}</p>
 
         <form action={handleAction} className="space-y-4"> 
 
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">{t("name")}</label>
             <Input 
                 name="name" 
                 id="name" 
                 type="text" 
                 placeholder="Name" 
-                className="bg-[#DDDBFF] border-none" 
+                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
                 required 
             />
 
-            <label htmlFor="category">Pick a category</label>
-            <Input 
-                name="category" 
-                id="category" 
-                placeholder="Select a category" 
-                className="bg-[#DDDBFF] border-none" 
-                required 
-            />
+            <label htmlFor="category">{t("categoryPick")}</label>
+            <CategoryPicker categories={existingCategories} name="category"/>
 
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                    <label htmlFor="amount">Amount paid</label>
+                    <label htmlFor="amount">{t("amount")}</label>
                     <Input 
                         name="amount" 
                         id="amount" 
                         type="number" 
                         placeholder="100" 
-                        className="bg-[#DDDBFF] border-none" 
+                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
                         required 
                     />
                 </div>
                 <div className="space-y-1">
-                    <label>Currency</label>
+                    <label>{t("currencySelect")}</label>
                     <CurrencySelect name="currency" defaultValue="USD"/>
                 </div>
             </div>
 
-            <label htmlFor="cycle">Billing cycle in days</label>
+            <label htmlFor="cycle">{t("billingCycle")}</label>
             <Input 
                 name="cycle" 
                 id="cycle" 
                 type="number" 
                 placeholder="30" 
-                className="bg-[#DDDBFF] border-none" 
+                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
                 required 
             />
 
           <Button type="submit" className="w-full bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">
-            Add
+            {t("add")}
           </Button>
         </form>
 

@@ -1,26 +1,45 @@
 "use client"
 
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/app/components/ui/combobox"
+import { useState } from "react"
+import { Combobox, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxList } from "@/app/components/ui/combobox"
 
 interface CategoryPickerProps {
   categories: string[];
+  name?: string;
 }
 
-export function CategoryPicker({ categories }: CategoryPickerProps) {
+export function CategoryPicker({ categories, name="category" }: CategoryPickerProps) {
+  const [value, setValue] = useState("")
 
   return (
-     <Combobox items={categories}>
-      <ComboboxInput placeholder="Select a category" />
-      <ComboboxContent>
-        <ComboboxEmpty>No items found.</ComboboxEmpty>
-        <ComboboxList>
-          {(item) => (
-            <ComboboxItem key={item} value={item}>
-              {item}
-            </ComboboxItem>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+  <>
+    <input type="hidden" name={name} value={value} />
+    <Combobox 
+        value={value} 
+        onValueChange={(val) => {
+          setValue(val ?? "")
+        }}
+      >
+        <ComboboxInput 
+          placeholder="Select or type..." 
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="bg-[rgb(var(--secondary))] border-none w-full"
+        />
+        <ComboboxContent className="z-[99] pointer-events-auto bg-[rgb(var(--secondary))] border">
+          <ComboboxList>
+            {categories.map((cat) => (
+              <ComboboxItem 
+                key={cat} 
+                value={cat}
+              >
+                {cat}
+              </ComboboxItem>
+            ))}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+  </>
+   
   )
 }

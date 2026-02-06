@@ -34,14 +34,14 @@ export async function createDebt(formData: FormData) {
         category: {
             connectOrCreate: {
                 where: {
-                    name_userId: {
-                        name: categoryName,
-                        userId: session.user.id,
-                    },
-                },
-                create: {
+                  name_userId: {
                     name: categoryName,
                     userId: session.user.id,
+                  },
+                },
+                create: {
+                  name: categoryName,
+                  userId: session.user.id,
                 },
             },
         },

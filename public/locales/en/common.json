@@ -1,11 +1,6 @@
 {
   "appName": "My App",
   "description": "This is a test application",
-  "login": "Log in",
-  "logout": "Log out",
-  "language": "Language",
-  "save": "Save",
-  "cancel": "Cancel",
 
   "settings": "Settings",
   "incomeBtn": "Set Income",
@@ -15,5 +10,33 @@
   "general": "General",
   "welcome": "Welcome",
   "more": "More",
-  "exportData": "Export Data"
+  "exportData": "Export Data",
+
+  "english": "English",
+  "ukrainian": "Ukrainian",
+  "currency": "Dashboard currency",
+  "pick sentance": "Pick in which currency the dashboard will be displayed in. By default the dashboard will be in USD.",
+  "language": "Language",
+  "logout": "Log out",
+  "d/l mode": "Dark/Light Mode",
+
+  "modalSentence": "For us to better understand and calculate your finances please fill in the information below:",
+  "currencySelect": "Currency",
+  "add": "Add",
+  "name": "Name",
+  "amount": "Amount paid",
+  "categoryPick": "Pick a category",
+  "pickCurrecncyType": "Pick a currency type",
+
+  "incomeModal": "Set your Income",
+  "monthlyIncome": "Your monthly income",
+
+  "debtModal": "Add a Debt",
+  "initial": "Inital",
+  "current": "Current",
+
+  "purchaseModal": "Add a Purchase",
+
+  "subscriptionModal": "Add a Subscription",
+  "billingCycle": "Billing cycle in days"
 }

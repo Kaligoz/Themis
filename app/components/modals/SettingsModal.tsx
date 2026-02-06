@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { IconMoonFilled } from "@tabler/icons-react";
 import { CurrencySelect } from "../CurrencySelect";
+import { useTranslation } from "react-i18next";
 
 interface SetSettingsProps {
   isOpen: boolean;
@@ -24,31 +25,41 @@ const logout = async() => {
 };
 
 export function SettingsModal({ isOpen, setIsOpen }: SetSettingsProps) {
-    return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="bg-[rgb(var(--background))]">
-      <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
-      </DialogHeader>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <IconMoonFilled/>
-            <p className="text-xl">Dark/Light Mode</p>
-          </div>
-          <ModeToggle/>
-        </div>
-        <p className="text-xl">Language</p>
-        <LanguageToggle/>
-        <div className="space-y-1">
-         <p className="text-xl">Dashboard currency</p>
-          <p className="text-base">Pick in which currency the dashboard will be displayed in.
-          <br/>By default the dashboard will be in USD.</p>
+  
+  const { t } = useTranslation("common")
+
+  return (
+  <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <DialogContent className="bg-[rgb(var(--background))]">
+    <DialogHeader>
+        <DialogTitle>{t("settings")}</DialogTitle>
+    </DialogHeader>
+
+      <div className="flex items-center justify-between">
+
+        <div className="flex items-center gap-2">
+          <IconMoonFilled/>
+          <p className="text-xl">{t("d/l mode")}</p>
         </div>
 
-        <CurrencySelect name="currency" defaultValue="USD"/>
+        <ModeToggle/>
+
+      </div>
+
+      <p className="text-xl">{t("language")}</p>
+      <LanguageToggle/>
+
+      <div className="space-y-1">
+
+        <p className="text-xl">{t("currency")}</p>
+        <p className="text-base">{t("pick sentance")}</p>
         
-        <Button onClick={logout} className="w-full bg-[#E21010] hover:bg-[#960a0a] cursor-pointer text-white">Logout</Button>
-      </DialogContent>
-    </Dialog>
-    )
+      </div>
+
+      <CurrencySelect name="currency" defaultValue="USD"/>
+      
+      <Button onClick={logout} className="w-full bg-[#E21010] hover:bg-[#960a0a] cursor-pointer text-white">{t("logout")}</Button>
+    </DialogContent>
+  </Dialog>
+  )
 }
