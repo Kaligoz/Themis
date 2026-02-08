@@ -1,33 +1,26 @@
-"use client"
+import IncomeDataCards from "./components/IncomeDataCards";
+import { DashboardLayout } from "./components/DashboardLayout";
+import { getDashboardData } from "@/app/lib/data";
+import { TableDebts } from "./components/tables/TableDebts";
+import { TablePurchases } from "./components/tables/TablePurchases";
+import { TableSubscription } from "./components/tables/TableSubscriptions";
 
-import { AppSidebar } from "@/app/components/Sidebar";
-import { SiteHeader } from "@/app/components/Header";
-import { SidebarInset, SidebarProvider } from "@/app/components/ui/sidebar";
+export default async function Home() {
 
-export default function Home() {
+  const data = await getDashboardData()
+
+  if (!data) {
+    return <div>Please log in to view your dashboard.</div>
+  }
 
   return (
-    <main>
-      <SidebarProvider
-        style={
-          {
-            "--sidebar-width": "calc(var(--spacing) * 72)",
-            "--header-height": "calc(var(--spacing) * 12)",
-          } as React.CSSProperties
-        }
-      > 
-        <AppSidebar variant="inset"/>
-        <SidebarInset>
-          <SiteHeader />
-          <div className="flex flex-1 flex-col">
-            <div className="@container/main flex flex-1 flex-col gap-2">
-              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                penis
-              </div>
-            </div>
-          </div>
-        </SidebarInset>
-      </SidebarProvider>
+    <main className="bg-[rgd(var(--background))]">
+      <DashboardLayout >
+        <IncomeDataCards data={data} />
+        <TableDebts data={data} />
+        <TablePurchases data={data} />
+        <TableSubscription data={data} />
+      </DashboardLayout>
     </main>
   )
 };

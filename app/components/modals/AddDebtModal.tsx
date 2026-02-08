@@ -3,7 +3,7 @@
 import { CurrencySelect } from "../CurrencySelect";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { createDebt } from "@/app/actions/addDebt";
+import { createDebt } from "@/app/actions/ActionDebt";
 import { Input } from "../ui/input";
 import { CategoryPicker } from "../CategoryPicker";
 import { useTranslation } from "react-i18next";

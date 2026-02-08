@@ -6,10 +6,11 @@ import { Combobox, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxList } 
 interface CategoryPickerProps {
   categories: string[];
   name?: string;
+  defaultValue?: string;
 }
 
-export function CategoryPicker({ categories, name="category" }: CategoryPickerProps) {
-  const [value, setValue] = useState("")
+export function CategoryPicker({ categories, name="category", defaultValue }: CategoryPickerProps) {
+  const [value, setValue] = useState(defaultValue || "")
 
   return (
   <>

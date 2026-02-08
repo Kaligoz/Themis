@@ -16,7 +16,7 @@ export function NavMain() {
 
   const { t } = useTranslation("common")
 
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([])
   const [activeModal, setActiveModal] = useState<ModalType>(null)
   const closeModal = () => setActiveModal(null)
 
@@ -31,7 +31,7 @@ export function NavMain() {
       } catch (err) {
         console.error("Failed to load categories", err)
       }
-    };
+    }
 
     fetchCategories()
   }, [activeModal])
@@ -91,4 +91,4 @@ export function NavMain() {
       
     </SidebarGroup>
   )
-}
+};

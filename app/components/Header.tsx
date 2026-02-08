@@ -37,4 +37,4 @@ export function SiteHeader() {
       </div>
     </header>
   )
-}
+};

@@ -1,8 +1,8 @@
 "use client"
 
-import { useTranslation } from 'react-i18next'
-import i18n from '../lib/i18n'
-import { Button } from "@/app/components/ui/button"
+import { useTranslation } from 'react-i18next';
+import i18n from '../lib/i18n';
+import { Button } from "@/app/components/ui/button";
 
 export function LanguageToggle() {
   
@@ -18,4 +18,4 @@ export function LanguageToggle() {
       </Button>
     </div>
   )
-}
+};

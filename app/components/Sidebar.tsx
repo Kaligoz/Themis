@@ -18,5 +18,4 @@ export function AppSidebar({ ...props }) {
       </SidebarFooter>
     </Sidebar>
   )
-}
-
+};

@@ -20,16 +20,16 @@ export default function RegisterForm() {
     const [loading, setLoading] = useState(false)
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
+		const file = e.target.files?.[0]
 		if (file) {
-			setImage(file);
-			const reader = new FileReader();
+			setImage(file)
+			const reader = new FileReader()
 			reader.onloadend = () => {
-				setImagePreview(reader.result as string);
-			};
-			reader.readAsDataURL(file);
+				setImagePreview(reader.result as string)
+			}
+			reader.readAsDataURL(file)
 		}
-	};
+	}
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault()
@@ -38,7 +38,7 @@ export default function RegisterForm() {
 
         if (password !== passwordConfirmation) {
             toast.error("Passwords do not match!")
-            return; 
+            return
         }
 
         const { error } = await authClient.signUp.email({
@@ -46,7 +46,7 @@ export default function RegisterForm() {
             email,
             password,
             image: image ? await convertImageToBase64(image) : "",
-        });
+        })
 
         setLoading(false)
 
@@ -148,8 +148,8 @@ export default function RegisterForm() {
                                 <X
                                     className="cursor-pointer"
                                     onClick={() => {
-                                        setImage(null);
-                                        setImagePreview(null);
+                                        setImage(null)
+                                        setImagePreview(null)
                                     }}
                                 />
                             )}
@@ -165,13 +165,13 @@ export default function RegisterForm() {
 
         </form>
     )
-}
+};
 
 async function convertImageToBase64(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onloadend = () => resolve(reader.result as string);
-		reader.onerror = reject;
-		reader.readAsDataURL(file);
-	});
-}
+		const reader = new FileReader()
+		reader.onloadend = () => resolve(reader.result as string)
+		reader.onerror = reject
+		reader.readAsDataURL(file)
+	})
+};

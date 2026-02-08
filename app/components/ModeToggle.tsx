@@ -1,8 +1,8 @@
 "use client"
 
-import { useTheme } from "next-themes"
-import { Switch } from "@/app/components/ui/switch"
-import React from "react"
+import { useTheme } from "next-themes";
+import { Switch } from "@/app/components/ui/switch";
+import React from "react";
 
 export function ModeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
@@ -27,4 +27,4 @@ export function ModeToggle() {
     />
   </div>
   )
-}
+};

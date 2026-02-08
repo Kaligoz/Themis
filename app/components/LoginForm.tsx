@@ -17,8 +17,8 @@ export default function LoginForm() {
         await authClient.signIn.social({
             provider,
             callbackURL: "/", 
-        });
-    };
+        })
+    }
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault()
@@ -33,7 +33,7 @@ export default function LoginForm() {
 
         if (!email || !password) {
             toast.error("Please fill in all required fields")
-            return;
+            return
         }
 
         setLoading (false)
@@ -103,4 +103,4 @@ export default function LoginForm() {
             </Button>
         </div>
     )
-}
+};

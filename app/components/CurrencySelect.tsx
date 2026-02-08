@@ -25,5 +25,5 @@ export function CurrencySelect({ defaultValue = "USD", name = "currency" }: Curr
         ))}
       </SelectContent>
     </Select>
-  );
+  )
 }
