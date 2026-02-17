@@ -1,9 +1,9 @@
 import IncomeDataCards from "./components/IncomeDataCards";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { getDashboardData } from "@/app/lib/data";
-import { TableDebts } from "./components/tables/TableDebts";
-import { TablePurchases } from "./components/tables/TablePurchases";
-import { TableSubscription } from "./components/tables/TableSubscriptions";
+import DualTableDashboard from "./components/DualTableDashboard";
+import DualChartDashboard from "./components/DualChartDashboard";
+import { getExchangeRates } from "@/app/lib/currency";
 
 export default async function Home() {
 
@@ -13,13 +13,22 @@ export default async function Home() {
     return <div>Please log in to view your dashboard.</div>
   }
 
+  const rates = await getExchangeRates("USD");
+
   return (
-    <main className="bg-[rgd(var(--background))]">
-      <DashboardLayout >
-        <IncomeDataCards data={data} />
-        <TableDebts data={data} />
-        <TablePurchases data={data} />
-        <TableSubscription data={data} />
+    <main className="bg-[rgd(var(--background))]" id="main-dashboard-data">
+      <DashboardLayout>
+        <div className="flex flex-row w-full gap-4">
+          <div className="flex-1">
+            <IncomeDataCards data={data} />
+            <div className="m-4">
+              <DualChartDashboard data={data}/>
+            </div>
+          </div>
+          <div className="w-fit">
+            <DualTableDashboard data={data} baseCurrency={data.userBaseCurrency} rates={rates}/>
+          </div>
+        </div>
       </DashboardLayout>
     </main>
   )

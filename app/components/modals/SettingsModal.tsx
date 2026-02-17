@@ -8,10 +8,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { IconMoonFilled } from "@tabler/icons-react";
 import { CurrencySelect } from "../CurrencySelect";
 import { useTranslation } from "react-i18next";
+import { updateBaseCurrency } from "@/app/actions/updateUser";
 
 interface SetSettingsProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  currentBaseCurrency?: string;
 };
 
 const logout = async() => {
@@ -24,9 +26,18 @@ const logout = async() => {
   })
 };
 
-export function SettingsModal({ isOpen, setIsOpen }: SetSettingsProps) {
+export function SettingsModal({ isOpen, setIsOpen, currentBaseCurrency }: SetSettingsProps) {
   
   const { t } = useTranslation("common")
+
+  async function handleAction(formData: FormData) {
+      const result = await updateBaseCurrency(formData)
+      if (result.success) {
+          setIsOpen(false)
+      } else {
+          alert(result.error)
+      }
+  }
 
   return (
   <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -56,7 +67,13 @@ export function SettingsModal({ isOpen, setIsOpen }: SetSettingsProps) {
         
       </div>
 
-      <CurrencySelect name="currency" defaultValue="USD"/>
+      <form action={handleAction} className="space-y-4">
+
+        <CurrencySelect name="currency" defaultValue={currentBaseCurrency || "USD"}/>
+
+        <Button type="submit" className="w-full bg-[#2F27CE] hover:bg-[#1f1a8e] text-white hover:cursor-pointer">{t("change")}</Button>
+
+      </form>
       
       <Button onClick={logout} className="w-full bg-[#E21010] hover:bg-[#960a0a] cursor-pointer text-white">{t("logout")}</Button>
     </DialogContent>

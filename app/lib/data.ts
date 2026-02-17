@@ -14,7 +14,7 @@ export async function getDashboardData() {
     db.debt.findMany({ where: { userId }, include: { category: true }}),
     db.subscription.findMany({ where: { userId }, include: { category: true }}),
     db.purchase.findMany({ where: { userId }, include: { category: true }}),
-    db.user.findUnique({ where: { id: userId }, select: { income: true }}),
+    db.user.findUnique({ where: { id: userId }, select: { income: true, baseCurrency: true }}),
     db.category.findMany({ where: { userId }, select: { name: true }}) 
   ])
 
@@ -23,7 +23,8 @@ export async function getDashboardData() {
     subs, 
     purchases, 
     income: user?.income || 0,
-    categories: categories.map(c => c.name) 
+    categories: categories.map(c => c.name),
+    userBaseCurrency: user?.baseCurrency || "USD",
   }
 
 }

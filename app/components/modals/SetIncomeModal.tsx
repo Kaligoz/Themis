@@ -54,6 +54,17 @@ export function SetIncomeModal({ isOpen, setIsOpen, initialCurrency, initialInco
             <CurrencySelect name="currency" defaultValue={initialCurrency}/>
           </div>
         </div>
+        <div className="space-y-1">
+          <label htmlFor="date">{t("date")}</label>
+          <Input 
+            name="date" 
+            id="date" 
+            type="date" 
+            defaultValue={new Date().toISOString().split('T')[0]} 
+            className="bg-[rgb(var(--secondary))] border-none"
+            required 
+          />
+        </div>
 
         <Button type="submit" className="w-full bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">
           {initialIncome ? "Update" : "Add"}

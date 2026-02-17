@@ -19,6 +19,8 @@
   "language": "Мова",
   "logout": "Вийти",
   "d/l mode": "Темний/Світлий режим",
+  "change": "Зберегти змінити",
+  "delete": "Видалити",
 
   "modalSentence": "Щоб ми могли краще розуміти та розраховувати ваші фінанси, будь ласка, заповніть інформацію нижче:",
   "currencySelect": "Валюта",
@@ -38,5 +40,22 @@
   "purchaseModal": "Додати покупку",
 
   "subscriptionModal": "Додати підписку",
-  "billingCycle": "Платіжний цикл у днях"
+  "billingCycle": "Платіжний цикл у днях",
+  "activeStatus": "Активний",
+
+  "subscriptionTable": "Підписка",
+  "amountTable": "Сума",
+  "billingCycleTable": "Платіжний цикл",
+  "categoryTable": "Категорія",
+  "purchasesTable": "Покупки",
+  "debtsTable": "Борги",
+  "paidTable": "Сплачено",
+
+  "date": "Дата",
+
+  "cashFlow": "Історія грошового потоку",
+  "spendingCategory": "Витрати за категоріями",
+  "spendingCategoryDesc": "Підрахунок усіх витрат за категоріями",
+  "incomeVsExp": "Дохід проти витрат",
+  "incomeVsExpDesc": "Візуалізація вашого грошового потоку"
 }

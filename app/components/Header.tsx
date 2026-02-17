@@ -4,6 +4,7 @@ import { SidebarTrigger } from "@/app/components/ui/sidebar";
 import { authClient } from "../lib/auth-client";
 import { useTranslation } from "react-i18next";
 import { IconFileExport } from "@tabler/icons-react";
+import { handleExport } from "@/app/lib/utils"
 
 export function SiteHeader() {
 
@@ -25,13 +26,9 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">{t("welcome")}, {user.name}!</h1>
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="border-2 bg-[rgb(var(--secondary))] sm:flex">
-            <a
-              href="#"
-            >
-              <IconFileExport/>
-              {t("exportData")}
-            </a>
+          <Button variant="ghost" size="sm" className="border-2 bg-[rgb(var(--secondary))] sm:flex" onClick={() => handleExport('main-dashboard-data')}>
+            <IconFileExport/>
+            {t("exportData")}
           </Button>
         </div>
       </div>

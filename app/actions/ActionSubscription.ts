@@ -67,6 +67,7 @@ export async function editSubscription(formData: FormData) {
     const categoryName = formData.get("category") as string
     const amount = Math.round(Number(formData.get("amount")))
     const billingCycle = Math.round(Number(formData.get("cycle")))
+    const isActive = formData.get("isActive") === "on"
 
     try {
         await db.subscription.update({
@@ -79,6 +80,7 @@ export async function editSubscription(formData: FormData) {
                 amount: amount,
                 currency: currency,
                 billingCycle: billingCycle,
+                isActive: isActive,
                 category: {
                     connectOrCreate: {
                         where: { name_userId: { name: categoryName, userId: session.user.id} },

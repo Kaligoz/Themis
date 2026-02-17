@@ -15,22 +15,19 @@ export async function createIncome(formData: FormData) {
     
   const rawIncome = formData.get("income")
   const currency = formData.get("currency") as string
+  const rawDate = formData.get("date") as string
 
   const incomeValue = Math.round(Number(rawIncome))
   if (isNaN(incomeValue)) return { error: "Invalid amount" }
 
+  const dateValue = rawDate ? new Date(rawDate) : new Date()
+
   try {
-    await db.income.upsert({
-      where: {
-        userId: session.user.id, 
-      },
-      update: {
-        income: incomeValue,   
+    await db.income.create({
+      data: {
+        income: incomeValue,
         currency: currency,
-      },
-      create: {
-        income: incomeValue,   
-        currency: currency,
+        createdAt: dateValue, 
         userId: session.user.id,
       },
     })

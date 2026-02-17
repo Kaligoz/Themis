@@ -35,14 +35,14 @@ export function EditDebtModal({ isOpen, setIsOpen, data, selectedDebt }: AddDebt
     }
 
     async function handleDeleteClick() {
-        const confirmed = confirm(t("deleteConfirm") || "Are you sure you want to delete this?")
+        const confirmed = confirm("Are you sure you want to delete this?")
         if (confirmed) {
             if (!selectedDebt) return
             const result = await deleteDebt(selectedDebt.id)
             if (result.success) {
-                setIsOpen(false);
+                setIsOpen(false)
             } else {
-                alert(result.error);
+                alert(result.error)
             }
         }
     }
@@ -95,8 +95,8 @@ export function EditDebtModal({ isOpen, setIsOpen, data, selectedDebt }: AddDebt
 
 
             <div className="flex gap-2">
-                <Button type="submit" className="flex-1 bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">Change</Button>
-                <Button type="button" className="flex-1 bg-[#E21010] hover:bg-[#9c0909] text-white py-6 hover:cursor-pointer" onClick={handleDeleteClick}>Delete</Button>
+                <Button type="submit" className="flex-1 bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">{t("change")}</Button>
+                <Button type="button" className="flex-1 bg-[#E21010] hover:bg-[#9c0909] text-white py-6 hover:cursor-pointer" onClick={handleDeleteClick}>{t("delete")}</Button>
             </div>
         </form>
 

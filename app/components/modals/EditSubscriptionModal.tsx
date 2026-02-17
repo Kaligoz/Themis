@@ -8,6 +8,7 @@ import { Input } from "../ui/input";
 import { CategoryPicker } from "../CategoryPicker";
 import { useTranslation } from "react-i18next";
 import { getDashboardData } from "@/app/lib/data";
+import { Switch } from "../ui/switch";
 
 interface EditSubscriptionModalProps {
     isOpen: boolean;
@@ -40,9 +41,9 @@ export function EditSubscriptionModal({ isOpen, setIsOpen, data, selectedSubscri
             if (!selectedSubscription) return
             const result = await deleteSubscription(selectedSubscription.id)
             if (result.success) {
-                setIsOpen(false);
+                setIsOpen(false)
             } else {
-                alert(result.error);
+                alert(result.error)
             }
         }
     }
@@ -103,9 +104,14 @@ export function EditSubscriptionModal({ isOpen, setIsOpen, data, selectedSubscri
                 defaultValue={selectedSubscription.billingCycle}
             />
 
-          <div className="flex gap-2">
-                <Button type="submit" className="flex-1 bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">Change</Button>
-                <Button type="button" className="flex-1 bg-[#E21010] hover:bg-[#9c0909] text-white py-6 hover:cursor-pointer" onClick={handleDeleteClick}>Delete</Button>
+            <div className="flex items-center space-x-2 py-2">
+                <label htmlFor="isActive" className="text-sm font-medium">{t("activeStatus")}</label>
+                <Switch id="isActive" name="isActive" defaultChecked={selectedSubscription.isActive}/>
+            </div>
+
+            <div className="flex gap-2">
+                <Button type="submit" className="flex-1 bg-[#2F27CE] hover:bg-[#1f1a8e] text-white py-6 hover:cursor-pointer">{t("change")}</Button>
+                <Button type="button" className="flex-1 bg-[#E21010] hover:bg-[#9c0909] text-white py-6 hover:cursor-pointer" onClick={handleDeleteClick}>{t("delete")}</Button>
             </div>
         </form>
 

@@ -19,6 +19,8 @@
   "language": "Language",
   "logout": "Log out",
   "d/l mode": "Dark/Light Mode",
+  "change": "Save changes",
+  "delete": "Delete",
 
   "modalSentence": "For us to better understand and calculate your finances please fill in the information below:",
   "currencySelect": "Currency",
@@ -38,5 +40,22 @@
   "purchaseModal": "Add a Purchase",
 
   "subscriptionModal": "Add a Subscription",
-  "billingCycle": "Billing cycle in days"
+  "billingCycle": "Billing cycle in days",
+  "activeStatus": "Active",
+
+  "subscriptionTable": "Subscription", 
+  "amountTable": "Amount",
+  "billingCycleTable": "Billing Cycle",
+  "categoryTable": "Category",
+  "purchasesTable": "Purchases",
+  "debtsTable": "Debts",
+  "paidTable": "Paid",
+
+  "date": "Date",
+
+  "cashFlow": "Cash Flow History",
+  "spendingCategory": "Spending By Category",
+  "spendingCategoryDesc": "Counting all catogetory spending",
+  "incomeVsExp": "Income vs Expense",
+  "incomeVsExpDesc": "Visualizing your cash flow"
 }
