@@ -5,15 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/ca
 import { ChartContainer, type ChartConfig } from "@/app/components/ui/chart";
 import { getDashboardData } from "@/app/lib/data";
 import { useTranslation } from "react-i18next";
+import { convertAmount } from "@/app/lib/currency";
 
 type DashboardData = NonNullable<Awaited<ReturnType<typeof getDashboardData>>>;
 
 interface CashFlowChartProps {
   data: DashboardData;
   selector?: React.ReactNode;
+  rates: Record<string, number>;    
+  baseCurrency: string;
 };
 
-export function CashFlowChart({ data, selector }: CashFlowChartProps) {
+export function CashFlowChart({ data, selector, baseCurrency, rates }: CashFlowChartProps) {
 
   const { t } = useTranslation("common")
   
@@ -24,7 +27,7 @@ export function CashFlowChart({ data, selector }: CashFlowChartProps) {
       month: "short",
       day: "numeric",
     }),
-    income: item.income,
+    income: convertAmount(item.income, item.currency, baseCurrency, rates),
   })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const chartConfig = {
@@ -33,7 +36,7 @@ export function CashFlowChart({ data, selector }: CashFlowChartProps) {
   } satisfies ChartConfig
 
   return (
-    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4">
+    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{t("cashFlow")}</CardTitle>
         <div className="flex items-center">
@@ -58,6 +61,7 @@ export function CashFlowChart({ data, selector }: CashFlowChartProps) {
                   axisLine={false} 
                   tickMargin={8}
                   minTickGap={32}
+                  className="fill-black dark:fill-white"
                 />
                 <YAxis hide />
                 <Tooltip />
@@ -75,5 +79,5 @@ export function CashFlowChart({ data, selector }: CashFlowChartProps) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

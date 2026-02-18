@@ -25,7 +25,7 @@ export function CategoryPicker({ categories, name="category", defaultValue }: Ca
           placeholder="Select or type..." 
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="bg-[rgb(var(--secondary))] border-none w-full"
+          className="bg-[rgb(var(--secondary))] border-none w-full dark:bg-[rgb(var(--secondary))]"
         />
         <ComboboxContent className="z-[99] pointer-events-auto bg-[rgb(var(--secondary))] border">
           <ComboboxList>

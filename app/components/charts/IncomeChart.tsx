@@ -5,15 +5,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app
 import { ChartContainer, type ChartConfig } from "@/app/components/ui/chart";
 import { getDashboardData } from "@/app/lib/data";
 import { useTranslation } from "react-i18next";
+import { convertAmount } from "@/app/lib/currency";
 
 type DashboardData = NonNullable<Awaited<ReturnType<typeof getDashboardData>>>;
 
 interface IncomeExpensesProps {
   data: DashboardData;
   selector?: React.ReactNode;
+  rates: Record<string, number>;    
+  baseCurrency: string;
 };
 
-export function IncomeExpenses({ data, selector }: IncomeExpensesProps) {
+export function IncomeExpenses({ data, selector, baseCurrency, rates }: IncomeExpensesProps) {
 
   const { t } = useTranslation("common")
   
@@ -23,15 +26,29 @@ export function IncomeExpenses({ data, selector }: IncomeExpensesProps) {
   if (incomeArray.length === 0) return null
   const latestIncomeRecord = incomeArray[incomeArray.length - 1]
 
-  const totalDebts = data.debts?.reduce((acc: number, curr) => acc + curr.current, 0) || 0;
-  const totalSubs = data.subs?.filter((sub) => sub.isActive).reduce((acc: number, curr) => acc + curr.amount, 0) || 0;
-  const totalPurchases = data.purchases?.reduce((acc: number, curr) => acc + curr.amount, 0) || 0;
+  const normalizedIncome = convertAmount(
+    latestIncomeRecord.income, 
+    latestIncomeRecord.currency, 
+    baseCurrency, 
+    rates
+  )
+
+  const totalDebts = data.debts.reduce((acc, curr) => {
+    return acc + convertAmount(curr.current, curr.currency, baseCurrency, rates);
+  }, 0)
+
+  const totalSubs = data.subs.filter(sub => sub.isActive).reduce((acc, curr) => {
+    return acc + convertAmount(curr.amount, curr.currency, baseCurrency, rates);
+  }, 0)
+
+  const totalPurchases = data.purchases.reduce((acc, curr) => {
+    return acc + convertAmount(curr.amount, curr.currency, baseCurrency, rates);
+  }, 0)
 
   const totalSpent = totalDebts + totalSubs + totalPurchases;
-  const incomeValue = latestIncomeRecord.income
 
   const chartData = [
-    { name: "Income", value: incomeValue },
+    { name: "Income", value: normalizedIncome },
     { name: "Spent", value: totalSpent }
   ];
 
@@ -40,7 +57,7 @@ export function IncomeExpenses({ data, selector }: IncomeExpensesProps) {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4">
+    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle>{t("incomeVsExp")}</CardTitle>
@@ -66,6 +83,7 @@ export function IncomeExpenses({ data, selector }: IncomeExpensesProps) {
                   tickLine={false}
                   axisLine={false}
                   fontSize={12}
+                  className="fill-black dark:fill-white"
                 />
                 <Tooltip cursor={false} />
                 <Bar 

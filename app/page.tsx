@@ -22,7 +22,7 @@ export default async function Home() {
           <div className="flex-1">
             <IncomeDataCards data={data} />
             <div className="m-4">
-              <DualChartDashboard data={data}/>
+              <DualChartDashboard data={data} baseCurrency={data.userBaseCurrency} rates={rates}/>
             </div>
           </div>
           <div className="w-fit">

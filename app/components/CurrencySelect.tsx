@@ -14,7 +14,7 @@ interface CurrencySelectProps {
 export function CurrencySelect({ defaultValue = "USD", name = "currency" }: CurrencySelectProps) {
   return (
     <Select name={name} defaultValue={defaultValue}>
-      <SelectTrigger className="w-full bg-[rgb(var(--secondary))] border-none dark:bg-[rgb(var(--secondary))]">
+      <SelectTrigger className="w-full bg-[rgb(var(--secondary))] border-none dark:bg-[rgb(var(--secondary))] dark:hover:bg-[rgb(var(--secondary))] hover:cursor-pointer">
         <SelectValue placeholder="Select Currency" className="text-gray-500"/>
       </SelectTrigger>
       <SelectContent className="bg-[rgb(var(--secondary))] border">

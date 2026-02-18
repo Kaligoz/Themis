@@ -5,12 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app
 import { ChartContainer, ChartLegend, ChartLegendContent, type ChartConfig } from "@/app/components/ui/chart";
 import { getDashboardData } from "@/app/lib/data";
 import { useTranslation } from "react-i18next";
+import { convertAmount } from "@/app/lib/currency";
 
 type DashboardData = NonNullable<Awaited<ReturnType<typeof getDashboardData>>>;
 
 interface SpendingByCategoryProps {
   data: DashboardData;
   selector?: React.ReactNode;
+  rates: Record<string, number>;
+  baseCurrency: string;
 };
 
 const COLORS = [
@@ -25,16 +28,28 @@ const COLORS = [
   "#4E47E0"
 ];
 
-export function SpendingByCategory({data, selector}: SpendingByCategoryProps) {
+export function SpendingByCategory({data, selector, rates, baseCurrency}: SpendingByCategoryProps) {
 
   const { t } = useTranslation("common")
 
   if (!data) return null
 
   const chartData = data.categories.map((categoryName: string) => {
+
     const categoryPurchases = data.purchases.filter(p => p.category.name === categoryName)
+
     const categorySubs = data.subs.filter(s => s.category.name === categoryName)
-    const total = categoryPurchases.reduce((sum, p) => sum + p.amount, 0) + categorySubs.reduce((sum, s) => sum + s.amount, 0)
+
+    const totalPurchases = categoryPurchases.reduce((sum, p) => {
+      return sum + convertAmount(p.amount, p.currency, baseCurrency, rates);
+    }, 0)
+
+    const totalSubs = categorySubs.reduce((sum, s) => {
+      return sum + convertAmount(s.amount, s.currency, baseCurrency, rates);
+    }, 0)
+
+    const total = totalPurchases + totalSubs
+    
     return {
       category: categoryName,
       amount: total,
@@ -54,7 +69,7 @@ export function SpendingByCategory({data, selector}: SpendingByCategoryProps) {
   }
 
   return (
-    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none max-h-[325px] mb-4">
+    <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none max-h-[325px] mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle>{t("spendingCategory")}</CardTitle>

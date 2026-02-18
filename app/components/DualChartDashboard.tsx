@@ -9,11 +9,13 @@ import { CashFlowChart } from "@/app/components/charts/CashFlowChart";
 
 interface DualChartDashboardProps {
     data: NonNullable<Awaited<ReturnType<typeof getDashboardData>>>;
+    rates: Record<string, number>;    
+    baseCurrency: string;
 };
 
 type ChartType = "cashFlowChart" | "incomeChart" | "spendingCategoryChart"
 
-export default function DualChartDashboard({data}: DualChartDashboardProps) {
+export default function DualChartDashboard({data, rates, baseCurrency}: DualChartDashboardProps) {
     const [slot1, setSlot1] = useState<ChartType>("cashFlowChart")
     const [slot2, setSlot2] = useState<ChartType>("incomeChart")
 
@@ -54,9 +56,9 @@ export default function DualChartDashboard({data}: DualChartDashboardProps) {
         })
 
         switch (type) {
-            case "cashFlowChart": return <CashFlowChart data={data} selector={selector} />
-            case "incomeChart": return <IncomeExpenses data={data} selector={selector} />
-            case "spendingCategoryChart": return <SpendingByCategory data={data} selector={selector} />
+            case "cashFlowChart": return <CashFlowChart data={data} selector={selector} baseCurrency={baseCurrency} rates={rates}/>
+            case "incomeChart": return <IncomeExpenses data={data} selector={selector} baseCurrency={baseCurrency} rates={rates}/>
+            case "spendingCategoryChart": return <SpendingByCategory data={data} selector={selector} baseCurrency={baseCurrency} rates={rates}/>
         }
     }
 

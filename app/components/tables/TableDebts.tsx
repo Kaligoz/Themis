@@ -28,9 +28,9 @@ export function TableDebts({data, selector, baseCurrency, rates}: TableDebtsProp
     const [selectedDebt, setSelectedDebt] = useState<Debt | null>(null)
 
     const handleRowClick = (debt: Debt) => {
-        setSelectedDebt(debt);
-        setIsOpen(true);
-    };
+        setSelectedDebt(debt)
+        setIsOpen(true)
+    }
 
     if (!data) return null
 
