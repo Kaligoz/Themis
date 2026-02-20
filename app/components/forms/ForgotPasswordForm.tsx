@@ -1,21 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { authClient } from "../lib/auth-client";
-import { Button } from "../components/ui/button";
+import { authClient } from "../../lib/auth-client";
+import { Button } from "../ui/button";
+import { toast } from "sonner";
+import Link from "next/link";
 
 export default function ForgotPasswordForm() {
     const [email, setEmail] = useState("")
-    const [sent, setSent] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setLoading(true);
 
-        await authClient.forgotPassword({
+        const { error } = await authClient.requestPasswordReset({
             email,
-        })
+            redirectTo: "/reset-password", 
+        });
 
-        setSent(true)
+        if (error) {
+            toast.error(error.message);
+        } else {
+            toast.success("Reset link sent to your email!");
+        }
+        setLoading(false);
     }
 
     return(
@@ -26,9 +35,17 @@ export default function ForgotPasswordForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="w-full h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-4 focus:outline-none"
             />
 
             <Button className="w-full bg-[rgb(var(--primary))] text-[rgb(var(--background))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--background))] cursor-pointer mb-4">Send reset link</Button>
+
+            <Link 
+                href="/auth" 
+                className="text-sm text-[rgb(var(--primary))] hover:underline"
+            >
+                Back to Login
+            </Link>
         </form>
     ) 
 }

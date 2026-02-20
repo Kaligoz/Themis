@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { authClient } from "../lib/auth-client";
-import { Button } from "../components/ui/button";
+import { authClient } from "@/app/lib/auth-client";
+import { Button } from "@/app/components/ui/button";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { toast } from "sonner";

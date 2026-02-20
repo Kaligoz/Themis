@@ -16,10 +16,11 @@ export async function proxy(request: NextRequest) {
     request.cookies.get("better-auth.session_token") || 
     request.cookies.get("__Secure-better-auth.session_token")
 
-  const isAuthPage = pathname === "/auth"
+  const publicRoutes = ["/auth", "/forgotPassword", "/reset-password"];
+  const isPublicPage = publicRoutes.some(route => pathname.startsWith(route));
 
-  if (isAuthPage || sessionToken) {
-    if (sessionToken && isAuthPage) {
+  if (isPublicPage || sessionToken) {
+    if (sessionToken && isPublicPage) {
       return NextResponse.redirect(new URL("/", request.url))
     }
     return NextResponse.next()
@@ -30,6 +31,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/:path*',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

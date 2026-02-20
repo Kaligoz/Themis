@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { authClient } from "../lib/auth-client";
-import { Button } from "../components/ui/button";
+import { authClient } from "../../lib/auth-client";
+import { Button } from "../ui/button";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function LoginForm() {
 
@@ -77,7 +78,8 @@ export default function LoginForm() {
                         className="w-full h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] mb-2 focus:outline-none"
                     />
 
-                    <label className="flex items-center gap-2 mb-4">
+                    <div className="flex justify-between items-center w-full">
+                        <label className="flex items-center gap-2 mb-4">
                         <input 
                             type="checkbox"
                             checked={rememberMe}
@@ -85,7 +87,15 @@ export default function LoginForm() {
                             className="w-6 h-6 accent-[rgb(var(--primary))] cursor-pointer"
                         />
                         Remember me                    
-                    </label>
+                        </label>
+
+                        <Link 
+                            href="/forgotPassword" 
+                            className="text-xs text-[rgb(var(--primary))] hover:underline mb-4"
+                        >
+                            Forgot your password?
+                        </Link>
+                    </div>
 
                 </div>
                 

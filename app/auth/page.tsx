@@ -1,8 +1,10 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
-import RegisterForm from "../components/RegisterForm"
-import LoginForm from "../components/LoginForm"
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
+import RegisterForm from "../components/forms/RegisterForm";
+import LoginForm from "../components/forms/LoginForm";
 
 export default function AuthPage() {
+    
     return (
         <main className="grid grid-cols-2 grid-rows-1">
             <section className="relative bg-[rgb(var(--accent))] shadow-[15px_0px_30px_20px_rgba(0,_0,_0,_0.1)] h-screen overflow-hidden">
