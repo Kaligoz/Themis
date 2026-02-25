@@ -29,26 +29,49 @@ export const handleExport = async (elementId: string) => {
     return 
   }
 
-  const canvas = await html2canvas(element, { scale: 2, useCORS: true, windowHeight: element.scrollHeight, logging: true,
+  const canvas = await html2canvas(element, { 
+    scale: 2, 
+    useCORS: true, 
+    windowHeight: element.scrollHeight, 
+    logging: true,
+    backgroundColor: "#ffffff",
     onclone: (clonedDoc) => {
-      const elements = clonedDoc.getElementsByTagName("*");
-      for (let i = 0; i < elements.length; i++) {
-        const style = window.getComputedStyle(elements[i]);
-        if (style.color.includes("lab") || style.backgroundColor.includes("lab") || style.borderColor.includes("lab")) {
-          (elements[i] as HTMLElement).style.color = "inherit";
-          (elements[i] as HTMLElement).style.backgroundColor = "transparent";
-          (elements[i] as HTMLElement).style.borderColor = "inherit";
-        }
+      const clonedElement = clonedDoc.getElementById(elementId)
+      if (clonedElement) {
+        clonedElement.style.height = `${element.scrollHeight}px`
+        clonedElement.style.transform = "none"
+        const allText = clonedElement.querySelectorAll("*")
+        allText.forEach((el) => {
+          const htmlEl = el as HTMLElement
+          htmlEl.style.lineHeight = "1.2"
+          const style = window.getComputedStyle(el)
+          if (style.color.includes("lab") || style.backgroundColor.includes("lab")) {
+            htmlEl.style.color = "black"
+            htmlEl.style.backgroundColor = "transparent"
+          }
+        });
       }
     },
   })
   
   const imgData = canvas.toDataURL('image/png')
-  const pdf = new jsPDF("p", "mm", "a4")
 
+  const pdf = new jsPDF("landscape", "mm", [720, 1320])
   const pdfWidth = pdf.internal.pageSize.getWidth()
   const pdfHeight = pdf.internal.pageSize.getHeight()
 
-  pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight)
+  const imgProps = pdf.getImageProperties(imgData)
+  const ratio = imgProps.width / imgProps.height
+
+  let finalWidth = pdfWidth
+  let finalHeight = pdfWidth / ratio
+
+  if (finalHeight > pdfHeight) {
+    const scaleFactor = pdfHeight / finalHeight
+    finalHeight = pdfHeight
+    finalWidth = finalWidth * scaleFactor
+  }
+
+  pdf.addImage(imgData, "PNG", (pdfWidth - finalWidth) / 2, 0, finalWidth, finalHeight)
   pdf.save("themis-report.pdf")
 }

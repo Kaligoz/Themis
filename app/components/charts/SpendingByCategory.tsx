@@ -72,8 +72,8 @@ export function SpendingByCategory({data, selector, rates, baseCurrency}: Spendi
     <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none max-h-[325px] mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle>{t("spendingCategory")}</CardTitle>
-          <CardDescription>{t("spendingCategoryDesc")}</CardDescription>
+          <CardTitle className="text-lg md:text-2xl">{t("spendingCategory")}</CardTitle>
+          <CardDescription className="text-xs md:text-sm">{t("spendingCategoryDesc")}</CardDescription>
         </div>
         <div className="flex items-center">
           {selector}

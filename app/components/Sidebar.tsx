@@ -8,7 +8,7 @@ export function AppSidebar({ ...props }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <h1 className="text-6xl font-bold text-[rgb(var(--primary))]">Themis</h1>     
+        <h1 className="md:text-6xl text-4xl font-bold text-[rgb(var(--primary))]">Themis</h1>     
       </SidebarHeader>
       <SidebarContent>
         <NavMain/>

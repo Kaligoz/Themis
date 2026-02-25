@@ -1,22 +1,27 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { getDashboardData } from "@/app/lib/data";
 import { formatCurrency } from "../lib/utils";
-import { getExchangeRates, convertAmount } from "@/app/lib/currency"; 
+import { convertAmount } from "@/app/lib/currency";
+import { useTranslation } from "react-i18next"; 
 
 type DashboardData = NonNullable<Awaited<ReturnType<typeof getDashboardData>>>;
 
 interface IncomeDataCardsProps {
     data: DashboardData;
-}
+    rates: Record<string, number>;    
+    baseCurrency: string;
+};
 
-export default async function IncomeDataCards({data}: IncomeDataCardsProps) {
+export default function IncomeDataCards({data, baseCurrency, rates}: IncomeDataCardsProps) {
+
+    const { t } = useTranslation("common")
+
     if (!data || !data.income) return null
 
     const incomeArray = Array.isArray(data.income) ? data.income : []
     if (incomeArray.length === 0) return null
-
-    const rates = await getExchangeRates("USD")
-    const baseCurrency = data.userBaseCurrency || "USD"
 
     const latestIncomeRecord = incomeArray[incomeArray.length - 1]
     const normalizedIncome = convertAmount(
@@ -46,9 +51,9 @@ export default async function IncomeDataCards({data}: IncomeDataCardsProps) {
     const formatedRemaining = formatCurrency(remaining, baseCurrency)
 
     const statsCards = [
-        { label: "Income", value: formatedIncome },
-        { label: "Spent", value: formatedSpent },
-        { label: "Remaining", value: formatedRemaining },
+        { label: t("income"), value: formatedIncome },
+        { label: t("spent"), value: formatedSpent },
+        { label:t("remaining"), value: formatedRemaining },
     ]
 
     return (
@@ -56,10 +61,10 @@ export default async function IncomeDataCards({data}: IncomeDataCardsProps) {
             {statsCards.map((stat, index) => (
                 <Card key={index} className="bg-[rgb(var(--background))] border-none shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)]">
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle className="text-base">{stat.label}</CardTitle>
+                        <CardTitle className="text-sm md:text-base">{stat.label}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-xl font-medium">{stat.value}</div> 
+                        <div className="text-base md:text-xl font-medium">{stat.value}</div> 
                     </CardContent>
                 </Card>
             ))}

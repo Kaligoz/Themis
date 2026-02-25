@@ -38,7 +38,7 @@ export function CashFlowChart({ data, selector, baseCurrency, rates }: CashFlowC
   return (
     <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>{t("cashFlow")}</CardTitle>
+        <CardTitle className="text-lg md:text-2xl">{t("cashFlow")}</CardTitle>
         <div className="flex items-center">
           {selector}
         </div>

@@ -35,7 +35,7 @@ export function EditPurchaseModal({ isOpen, setIsOpen, data, selectedPurchase }:
     }
 
     async function handleDeleteClick() {
-        const confirmed = confirm(t("deleteConfirm") || "Are you sure you want to delete this?")
+        const confirmed = confirm(t("deleteConfirm"))
         if (confirmed) {
             if (!selectedPurchase) return
             const result = await deletePurchase(selectedPurchase.id)

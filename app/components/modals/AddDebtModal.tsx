@@ -31,9 +31,9 @@ export function AddDebtModal({ isOpen, setIsOpen, existingCategories }: AddDebtM
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="bg-[rgb(var(--background))]">
         <DialogHeader>
-            <DialogTitle>{t("debtModal")}</DialogTitle>
+            <DialogTitle className="text-xl md:text-2xl">{t("debtModal")}</DialogTitle>
         </DialogHeader>
-        <p>{t("modalSentence")}</p>
+        <p className="md:text-base text-sm">{t("modalSentence")}</p>
 
         <form action={handleAction} className="space-y-4"> 
 
@@ -42,29 +42,29 @@ export function AddDebtModal({ isOpen, setIsOpen, existingCategories }: AddDebtM
 
             <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-1">
-                    <label htmlFor="initial">{t("initial")}</label>
+                    <label htmlFor="initial" className="md:text-base text-sm">{t("initial")}</label>
                     <Input 
                         name="initial" 
                         id="initial" 
                         type="number" 
                         placeholder="10,000" 
-                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
+                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500 md:text-base text-sm" 
                         required 
                     />
                 </div>
                 <div className="space-y-1">
-                    <label htmlFor="current">{t("current")}</label>
+                    <label htmlFor="current" className="md:text-base text-sm">{t("current")}</label>
                     <Input 
                         name="current" 
                         id="current" 
                         type="number" 
                         placeholder="5,000" 
-                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
+                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500 md:text-base text-sm" 
                         required 
                     />
                 </div>
                 <div className="space-y-1">
-                    <label>{t("currencySelect")}</label>
+                    <label className="md:text-base text-sm">{t("currencySelect")}</label>
                     <CurrencySelect name="currency"/>
                 </div>
             </div>

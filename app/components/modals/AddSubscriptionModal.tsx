@@ -31,50 +31,50 @@ export function AddSubscriptionModal({ isOpen, setIsOpen, existingCategories }: 
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="bg-[rgb(var(--background))]">
         <DialogHeader>
-            <DialogTitle>{t("subscriptionModal")}</DialogTitle>
+            <DialogTitle className="text-xl md:text-2xl">{t("subscriptionModal")}</DialogTitle>
         </DialogHeader>
-        <p>{t("modalSentence")}</p>
+        <p className="md:text-base text-sm">{t("modalSentence")}</p>
 
         <form action={handleAction} className="space-y-4"> 
 
-            <label htmlFor="name">{t("name")}</label>
+            <label htmlFor="name" className="md:text-base text-sm">{t("name")}</label>
             <Input 
                 name="name" 
                 id="name" 
                 type="text" 
                 placeholder="Name" 
-                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
+                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500 md:text-base text-sm" 
                 required 
             />
 
-            <label htmlFor="category">{t("categoryPick")}</label>
+            <label htmlFor="category" className="md:text-base text-sm">{t("categoryPick")}</label>
             <CategoryPicker categories={existingCategories} name="category"/>
 
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                    <label htmlFor="amount">{t("amount")}</label>
+                    <label htmlFor="amount" className="md:text-base text-sm">{t("amount")}</label>
                     <Input 
                         name="amount" 
                         id="amount" 
                         type="number" 
                         placeholder="100" 
-                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
+                        className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500 md:text-base text-sm" 
                         required 
                     />
                 </div>
                 <div className="space-y-1">
-                    <label>{t("currencySelect")}</label>
+                    <label className="md:text-base text-sm">{t("currencySelect")}</label>
                     <CurrencySelect name="currency" defaultValue="USD"/>
                 </div>
             </div>
 
-            <label htmlFor="cycle">{t("billingCycle")}</label>
+            <label htmlFor="cycle" className="md:text-base text-sm">{t("billingCycle")}</label>
             <Input 
                 name="cycle" 
                 id="cycle" 
                 type="number" 
                 placeholder="30" 
-                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500" 
+                className="bg-[rgb(var(--secondary))] border-none placeholder:text-gray-500 md:text-base text-sm"  
                 required 
             />
 

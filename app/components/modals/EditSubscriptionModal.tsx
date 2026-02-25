@@ -36,7 +36,7 @@ export function EditSubscriptionModal({ isOpen, setIsOpen, data, selectedSubscri
     }
 
     async function handleDeleteClick() {
-        const confirmed = confirm(t("deleteConfirm") || "Are you sure you want to delete this?")
+        const confirmed = confirm(t("deleteConfirm"))
         if (confirmed) {
             if (!selectedSubscription) return
             const result = await deleteSubscription(selectedSubscription.id)

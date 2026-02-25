@@ -10,10 +10,10 @@ export function LanguageToggle() {
 
   return (
     <div className="flex gap-2 w-full">
-      <Button onClick={() => i18n.changeLanguage('en')} className="flex-1 bg-[rgb(var(--secondary))] cursor-pointer">
+      <Button onClick={() => i18n.changeLanguage('en')} className="flex-1 md:text-base text-sm bg-[rgb(var(--secondary))] cursor-pointer">
         {t("english")}
       </Button>
-      <Button onClick={() => i18n.changeLanguage('ua')} className="flex-1 bg-[rgb(var(--secondary))] cursor-pointer">
+      <Button onClick={() => i18n.changeLanguage('ua')} className="flex-1 md:text-base text-sm bg-[rgb(var(--secondary))] cursor-pointer">
         {t("ukrainian")}
       </Button>
     </div>

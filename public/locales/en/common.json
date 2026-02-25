@@ -57,5 +57,10 @@
   "spendingCategory": "Spending By Category",
   "spendingCategoryDesc": "Counting all catogetory spending",
   "incomeVsExp": "Income vs Expense",
-  "incomeVsExpDesc": "Visualizing your cash flow"
+  "incomeVsExpDesc": "Visualizing your cash flow",
+  "deleteConfirm": "Are you sure you want to delete this?",
+
+  "income": "Income",
+  "spent": "Spent",
+  "remaining": "Remaining"
 }

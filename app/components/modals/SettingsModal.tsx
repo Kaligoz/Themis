@@ -43,27 +43,27 @@ export function SettingsModal({ isOpen, setIsOpen, currentBaseCurrency }: SetSet
   <Dialog open={isOpen} onOpenChange={setIsOpen}>
     <DialogContent className="bg-[rgb(var(--background))]">
     <DialogHeader>
-        <DialogTitle>{t("settings")}</DialogTitle>
+        <DialogTitle className="text-xl md:text-2xl">{t("settings")}</DialogTitle>
     </DialogHeader>
 
       <div className="flex items-center justify-between">
 
         <div className="flex items-center gap-2">
           <IconMoonFilled/>
-          <p className="text-xl">{t("d/l mode")}</p>
+          <p className="md:text-xl text-lg">{t("d/l mode")}</p>
         </div>
 
         <ModeToggle/>
 
       </div>
 
-      <p className="text-xl">{t("language")}</p>
+      <p className="md:text-xl text-lg">{t("language")}</p>
       <LanguageToggle/>
 
       <div className="space-y-1">
 
-        <p className="text-xl">{t("currency")}</p>
-        <p className="text-base">{t("pick sentance")}</p>
+        <p className="md:text-xl text-lg">{t("currency")}</p>
+        <p className="md:text-base text-sm">{t("pick sentance")}</p>
         
       </div>
 

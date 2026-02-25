@@ -35,7 +35,7 @@ export function EditDebtModal({ isOpen, setIsOpen, data, selectedDebt }: AddDebt
     }
 
     async function handleDeleteClick() {
-        const confirmed = confirm("Are you sure you want to delete this?")
+        const confirmed = confirm(t("deleteConfirm"))
         if (confirmed) {
             if (!selectedDebt) return
             const result = await deleteDebt(selectedDebt.id)

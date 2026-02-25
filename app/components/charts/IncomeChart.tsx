@@ -60,8 +60,8 @@ export function IncomeExpenses({ data, selector, baseCurrency, rates }: IncomeEx
     <Card className="flex flex-col shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] border-none mb-4 bg-[rgb(var(--background))]">
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle>{t("incomeVsExp")}</CardTitle>
-          <CardDescription>{t("incomeVsExpDesc")}</CardDescription>
+          <CardTitle className="text-lg md:text-2xl">{t("incomeVsExp")}</CardTitle>
+          <CardDescription className="text-xs md:text-sm">{t("incomeVsExpDesc")}</CardDescription>
         </div>
         <div className="flex items-center">
           {selector}

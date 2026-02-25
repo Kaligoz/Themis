@@ -24,7 +24,7 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{t("welcome")}, {user.name}!</h1>
+        <h1 className="text-sm md:text-base font-medium">{t("welcome")}, {user.name}!</h1>
         <div className="ml-auto flex items-center gap-2">
           <Button variant="ghost" size="sm" className="border-2 bg-[rgb(var(--secondary))] sm:flex hover:cursor-pointer" onClick={() => handleExport('main-dashboard-data')}>
             <IconFileExport/>

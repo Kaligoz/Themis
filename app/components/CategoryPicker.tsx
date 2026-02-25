@@ -27,7 +27,7 @@ export function CategoryPicker({ categories, name="category", defaultValue }: Ca
           onChange={(e) => setValue(e.target.value)}
           className="bg-[rgb(var(--secondary))] border-none w-full dark:bg-[rgb(var(--secondary))]"
         />
-        <ComboboxContent className="z-[99] pointer-events-auto bg-[rgb(var(--secondary))] border">
+        <ComboboxContent className="z-[99] pointer-events-auto bg-[rgb(var(--secondary))] border md:text-base text-sm">
           <ComboboxList>
             {categories.map((cat) => (
               <ComboboxItem 

@@ -38,7 +38,7 @@ export function TableSubscription({data, selector, rates, baseCurrency}: TableTa
     <>
     <Card className="bg-[rgb(var(--background))] border-none shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] m-4 w-[400px] h-[400px]">
         <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-xl">{t("subscriptionTable")}</CardTitle>
+            <CardTitle className="text-base md:text-xl">{t("subscriptionTable")}</CardTitle>
 
             <div className="flex items-center">
                 {selector}
@@ -48,10 +48,10 @@ export function TableSubscription({data, selector, rates, baseCurrency}: TableTa
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="text-gray-500">{t("name")}</TableHead>
-                        <TableHead className="text-gray-500">{t("amountTable")}</TableHead>
-                        <TableHead className="text-gray-500">{t("billingCycleTable")}</TableHead>
-                        <TableHead className="text-gray-500">{t("categoryTable")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("name")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("amountTable")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("billingCycleTable")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("categoryTable")}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody className="[&_tr]:border-b-0"> 
@@ -70,10 +70,10 @@ export function TableSubscription({data, selector, rates, baseCurrency}: TableTa
                                 onClick={() => handleRowClick(subscriptions)}
                                 className={!subscriptions.isActive ? "opacity-40 grayscale cursor-pointer h-10 transition-all hover:ring-1 hover:ring-black hover:ring-inset duration-200 rounded-md" : "cursor-pointer h-10 transition-all hover:ring-1 hover:ring-black hover:ring-inset duration-200 rounded-md"}
                             >
-                                <TableCell className="px-2 py-1 text-sm truncate max-w-[120px]">{subscriptions.name}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">{formatCurrency(convertedAmount, baseCurrency)}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">{subscriptions.billingCycle}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">{subscriptions.category.name}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm truncate max-w-[120px]">{subscriptions.name}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">{formatCurrency(convertedAmount, baseCurrency)}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">{subscriptions.billingCycle}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">{subscriptions.category.name}</TableCell>
                             </TableRow>
                         );
                     })}

@@ -38,7 +38,7 @@ export function TableDebts({data, selector, baseCurrency, rates}: TableDebtsProp
     <>
     <Card className="bg-[rgb(var(--background))] border-none shadow-[2px_0px_5px_0px_rgba(0,_0,_0,_0.2)] m-4 w-[400px] h-[400px]">
         <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-xl">{t("debtsTable")}</CardTitle>
+            <CardTitle className="text-base md:text-xl">{t("debtsTable")}</CardTitle>
 
             <div className="flex items-center">
                 {selector}
@@ -48,10 +48,10 @@ export function TableDebts({data, selector, baseCurrency, rates}: TableDebtsProp
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="text-gray-500">{t("categoryTable")}</TableHead>
-                        <TableHead className="text-gray-500">{t("initial")}</TableHead>
-                        <TableHead className="text-gray-500">{t("current")}</TableHead>
-                        <TableHead className="text-gray-500">{t("paidTable")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("categoryTable")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("initial")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("current")}</TableHead>
+                        <TableHead className="text-gray-500 text-xs md:text-sm hidden md:table-cell">{t("paidTable")}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody className="[&_tr]:border-b-0"> 
@@ -77,10 +77,10 @@ export function TableDebts({data, selector, baseCurrency, rates}: TableDebtsProp
                                 onClick={() => handleRowClick(debt)} 
                                 className="cursor-pointer hover:bg-muted/50 h-10 transition-all hover:ring-1 hover:ring-black hover:ring-inset duration-200 rounded-md"
                             >
-                                <TableCell className="px-2 py-1 text-sm truncate max-w-[120px]">{debt.category.name}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">{formatCurrency(convertedInitial, baseCurrency)}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">{formatCurrency(convertedCurrent, baseCurrency)}</TableCell>
-                                <TableCell className="px-2 py-1 text-sm">
+                                <TableCell className="px-2 py-1 text-xs md:text-sm truncate max-w-[120px]">{debt.category.name}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">{formatCurrency(convertedInitial, baseCurrency)}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">{formatCurrency(convertedCurrent, baseCurrency)}</TableCell>
+                                <TableCell className="px-2 py-1 text-xs md:text-sm">
                                     {formatCurrency(convertedInitial - convertedCurrent, baseCurrency)}
                                 </TableCell>
                             </TableRow>
