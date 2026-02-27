@@ -66,7 +66,7 @@ export default function RegisterForm() {
 
             <div className="flex flex-col items-left w-full">
 
-                <div className="flex justify-between items-start gap-8 mb-2">
+                <div className="flex justify-between items-start md:gap-8 gap-4 mb-2">
 
                     <div className="flex flex-col justify-center items-start">
                         <label htmlFor="firstName" className="mb-1.5">First name</label>
@@ -76,7 +76,7 @@ export default function RegisterForm() {
                             placeholder="John"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
+                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none w-full"
                         />
                     </div>
 
@@ -88,7 +88,7 @@ export default function RegisterForm() {
                             placeholder="Doe"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none"
+                            className="h-6.5 rounded-sm pl-0.5 bg-[rgb(var(--secondary))] focus:outline-none w-full"
                         />
                     </div>
                 </div>
